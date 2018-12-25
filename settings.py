@@ -1,0 +1,1 @@
+settingChose = "Ustawienia jeszcze nie działają"
