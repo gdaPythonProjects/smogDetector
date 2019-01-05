@@ -1,5 +1,10 @@
 
 def convertCityJsonData(cityData):
+    """
+    function is processing and returning important data about place where will be searching for MPoints
+    :param cityData: MAP_API json data
+    :return: dictionary of city data
+    """
     cityDict = dict()
 
     for elements in cityData['results']:

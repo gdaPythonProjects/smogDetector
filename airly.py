@@ -6,6 +6,12 @@ import urllib
 
 class Airly:
     def getAirlyApiNearestData(self, lat, lon):
+        """
+        From longitude and latitude, getting json response file from airly api
+        :param lat: latitude
+        :param lon: longitude
+        :return: response json
+        """
         airly_nearest_variables = {
             'apikey': variables.AIRLY_KEY,
             'Accept-Language': 'pl',
@@ -20,6 +26,11 @@ class Airly:
         return resp.json()
 
     def getAirlyApiMeasureData(self, id):
+        """
+        getting specific data from airly api MPoint
+        :param id: id of MPoing
+        :return: response json
+        """
         airly_measure_variables = {
             'apikey': variables.AIRLY_KEY,
             'Accept-Language': 'pl',
@@ -32,6 +43,11 @@ class Airly:
         return resp.json()
 
     def convertAirlyNearestJsonData(self, airlyJson):
+        """
+        airly api json data is processing and is returning dictionary data
+        :param airlyJson:
+        :return: airly dictionary
+        """
         airlyD = []
         i = 0
         for element in airlyJson:
@@ -45,6 +61,11 @@ class Airly:
         return airlyD
 
     def convertAirlyMeasureJsonData(self, airlyJson):
+        """
+                airly api json data is processing and is returning dictionary data
+                :param airlyJson:
+                :return: airly list
+                """
         airlyD = list()
         airly_v = dict()
         if len(airlyJson['current']['standards']) == 0:

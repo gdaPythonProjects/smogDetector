@@ -1,3 +1,19 @@
+"""
+Created by Piotr R. 2018-2019
+Application is searching for the nearest measuremenet point (MPoint) of the pollution.
+It is searching a place from the arguments or from user input
+Provides an information about place (latitude and longitude) and measures from the nearest point.
+running script without arguments will lead to menu which user can choose search for MPoints
+First arg - place, city where it should search for MPoint. Argument should be by one word or with quotation marks
+Example 1: main.py Gdansk
+Example 2: main.py "Gdansk, dluga"
+Example 3: main.py "Sopot, Haffnera 20"
+Second arg - interval to repeat measurement request (in seconds)
+Example 1: main.py Gdansk, 10
+Example 2: main.py "Gdansk, dluga", 60
+Example 3: main.py "Sopot, Haffnera 20", 900
+
+"""
 import variables
 import simple
 import advanced

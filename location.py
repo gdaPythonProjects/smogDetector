@@ -5,6 +5,11 @@ import urllib
 
 class Location:
     def getMapApiData(self, place):
+        """
+        this function is getting place from user and creating query for MAP_API
+        :param place:
+        :return: json response from MAP_API
+        """
         mapVariables = {
             'key': variables.MAP_API_KEY,
             'location': place+ ',pl',
