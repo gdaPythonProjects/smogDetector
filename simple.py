@@ -2,6 +2,7 @@ import variables
 import location
 import city
 import airly
+import time
 
 simpleChose = "Wybrales proste wyszukiwanie"
 
@@ -39,28 +40,59 @@ global airly_nearest
 
 class GetData:
 
-    def __init__(self):
-        city = self.getCity()
-        mapApiGet = location.Location()
-        cityJsonData = mapApiGet.getMapApiData(city)
-        cityDict = self.getCitydata(cityJsonData)
-        printCityData(cityDict)
-        airlyApiGet = airly.Airly()
-        airlyJsonData = airlyApiGet.getAirlyApiNearestData(cityDict['lat'], cityDict['lng'])
-        airly_nearest = airlyApiGet.convertAirlyNearestJsonData(airlyJsonData)
-        printAirlyNearest(airly_nearest)
-        for element in airly_nearest:
-            airly_json_measure = airlyApiGet.getAirlyApiMeasureData(element['id'])
-            airly_measure = airlyApiGet.convertAirlyMeasureJsonData(airly_json_measure)
-            print(f"Poziom zanieczyszczeń: {airly_measure[0]['level']}")
-            print(f"Wskazówka: {airly_measure[0]['advice']}")
-            names = ''
-            values = ''
-            for k, v in airly_measure[1].items():
-                names += "{:>15}".format(k)
-                values += "{:15}".format(v)
-            print(names)
-            print(values)
+    def __init__(self, city=None, interval=None):
+        if interval is not None:
+            while True:
+
+                if city is None:
+                    city = self.getCity()
+
+                mapApiGet = location.Location()
+                cityJsonData = mapApiGet.getMapApiData(city)
+                cityDict = self.getCitydata(cityJsonData)
+                printCityData(cityDict)
+                airlyApiGet = airly.Airly()
+                airlyJsonData = airlyApiGet.getAirlyApiNearestData(cityDict['lat'], cityDict['lng'])
+                airly_nearest = airlyApiGet.convertAirlyNearestJsonData(airlyJsonData)
+                printAirlyNearest(airly_nearest)
+                for element in airly_nearest:
+                    airly_json_measure = airlyApiGet.getAirlyApiMeasureData(element['id'])
+                    airly_measure = airlyApiGet.convertAirlyMeasureJsonData(airly_json_measure)
+                    print(f"Poziom zanieczyszczeń: {airly_measure[0]['level']}")
+                    print(f"Wskazówka: {airly_measure[0]['advice']}")
+                    names = ''
+                    values = ''
+                    for k, v in airly_measure[1].items():
+                        names += "{:>15}".format(k)
+                        values += "{:15}".format(v)
+                    print(names)
+                    print(values)
+                print(f'kolejny pomiar za {interval}s')
+                time.sleep(int(interval))
+        else:
+            if city is None:
+                city = self.getCity()
+
+            mapApiGet = location.Location()
+            cityJsonData = mapApiGet.getMapApiData(city)
+            cityDict = self.getCitydata(cityJsonData)
+            printCityData(cityDict)
+            airlyApiGet = airly.Airly()
+            airlyJsonData = airlyApiGet.getAirlyApiNearestData(cityDict['lat'], cityDict['lng'])
+            airly_nearest = airlyApiGet.convertAirlyNearestJsonData(airlyJsonData)
+            printAirlyNearest(airly_nearest)
+            for element in airly_nearest:
+                airly_json_measure = airlyApiGet.getAirlyApiMeasureData(element['id'])
+                airly_measure = airlyApiGet.convertAirlyMeasureJsonData(airly_json_measure)
+                print(f"Poziom zanieczyszczeń: {airly_measure[0]['level']}")
+                print(f"Wskazówka: {airly_measure[0]['advice']}")
+                names = ''
+                values = ''
+                for k, v in airly_measure[1].items():
+                    names += "{:>15}".format(k)
+                    values += "{:15}".format(v)
+                print(names)
+                print(values)
 
             # for measure_element in airly_measure:
             # for k,v in measure_element.items():
