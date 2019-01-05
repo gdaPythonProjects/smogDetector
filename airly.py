@@ -3,9 +3,9 @@ import variables
 import urllib
 
 
-
 class Airly:
-    def getAirlyApiNearestData(self, lat, lon):
+    @staticmethod
+    def getAirlyApiNearestData(lat, lon):
         """
         From longitude and latitude, getting json response file from airly api
         :param lat: latitude
@@ -25,7 +25,8 @@ class Airly:
         resp = requests.get(variables.airly_nearest_url + urllib.parse.urlencode(airly_nearest_variables))
         return resp.json()
 
-    def getAirlyApiMeasureData(self, id):
+    @staticmethod
+    def getAirlyApiMeasureData(id):
         """
         getting specific data from airly api MPoint
         :param id: id of MPoing
@@ -42,7 +43,8 @@ class Airly:
         resp = requests.get(variables.airly_measure_url + urllib.parse.urlencode(airly_measure_variables))
         return resp.json()
 
-    def convertAirlyNearestJsonData(self, airlyJson):
+    @staticmethod
+    def convertAirlyNearestJsonData(airlyJson):
         """
         airly api json data is processing and is returning dictionary data
         :param airlyJson:
@@ -60,7 +62,8 @@ class Airly:
             i += 1
         return airlyD
 
-    def convertAirlyMeasureJsonData(self, airlyJson):
+    @staticmethod
+    def convertAirlyMeasureJsonData(airlyJson):
         """
                 airly api json data is processing and is returning dictionary data
                 :param airlyJson:
@@ -82,5 +85,3 @@ class Airly:
             airlyD.append(airly_v)
             airlyD += airly_standards
             return airlyD
-
-

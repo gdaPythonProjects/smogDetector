@@ -4,7 +4,8 @@ import urllib
 
 
 class Location:
-    def getMapApiData(self, place):
+    @staticmethod
+    def getMapApiData(place):
         """
         this function is getting place from user and creating query for MAP_API
         :param place:
@@ -12,11 +13,9 @@ class Location:
         """
         mapVariables = {
             'key': variables.MAP_API_KEY,
-            'location': place+ ',pl',
+            'location': place + ',pl',
             'thumbMaps': 'false',
             'maxResults': 1
         }
         resp = requests.get(variables.map_url + urllib.parse.urlencode(mapVariables))
         return resp.json()
-
-

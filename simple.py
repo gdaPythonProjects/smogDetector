@@ -1,8 +1,8 @@
-import variables
-import location
-import city
-import airly
 import time
+
+import airly
+import city
+import location
 
 simpleChose = "Wybrales proste wyszukiwanie"
 
@@ -31,7 +31,7 @@ def check(active):
     :param bool active:
     :return translation if Mpoint is running or not:
     """
-    if active == True:
+    if active:
         return 'Włączony'
     else:
         return 'Wyłączony'
@@ -50,14 +50,15 @@ def printAirlyNearest(airlyDict):
               % (element['city'], element['street'], check(element['airly'])))
 
 
+# noinspection PyGlobalUndefined
 global airly_nearest
 
 
-
 class GetData:
-"""
-This class is getting data from MAP API and AIRLY API and printing all important information about air pollution
-"""
+    """
+    This class is getting data from MAP API and AIRLY API and printing all important information about air pollution
+    """
+
     def __init__(self, city=None, interval=None):
         if interval is not None:
             while True:
@@ -73,14 +74,15 @@ This class is getting data from MAP API and AIRLY API and printing all important
                 city = self.getCity()
             self.receiveAndPrintData(city)
 
-
             # for measure_element in airly_measure:
             # for k,v in measure_element.items():
 
-    def getCity(self):
+    @staticmethod
+    def getCity():
         return input("Podaj miejsce pomiaru smogu: ")
 
-    def getCitydata(self, jsonData):
+    @staticmethod
+    def getCitydata(jsonData):
         return city.convertCityJsonData(jsonData)
 
     def receiveAndPrintData(self, city):
@@ -105,4 +107,3 @@ This class is getting data from MAP API and AIRLY API and printing all important
                 values += "{:15}".format(v)
             print(names)
             print(values)
-

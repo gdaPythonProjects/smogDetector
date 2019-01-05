@@ -14,12 +14,12 @@ Example 2: main.py "Gdansk, dluga", 60
 Example 3: main.py "Sopot, Haffnera 20", 900
 
 """
-import variables
-import simple
+import sys
+
 import advanced
 import settings
-import exceptions
-import sys
+import simple
+import variables
 
 z = 0
 if len(sys.argv) == 1:
@@ -45,10 +45,9 @@ if len(sys.argv) == 1:
             print("nie wybrano poprawnej cyfry, wybierz jedną z opcji")
 
 else:
-   arguments = sys.argv[1:]
-   try:
-       simple.GetData(*arguments)
-   except Exception:
-       print("niepoprawne parametry")
-
+    arguments = sys.argv[1:]
+    try:
+        simple.GetData(*arguments)
+    except Exception:
+        print("niepoprawne parametry")
 
